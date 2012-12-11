@@ -11,7 +11,7 @@ LIB = lib
 SWIG = swig
 TOOLS = tools
 SCRIPTS = scripts
-WAVESLIB = $(LIB)/libwaves.a
+WAVESLIB = $(LIB)/libvrend.a
 
 ARFLAGS=rvs
 CFLAGS+=-g -Wall -I$(INC) -std=c++0x -c -fPIC
@@ -28,7 +28,7 @@ SOURCES=$(wildcard $(SRC)/*.cpp)
 TOOL_SOURCES=$(wildcard $(TOOLS)/*.cpp)
 OBJECTS=$(patsubst $(SRC)/%.cpp, $(OBJ)/%.o, $(SOURCES))
 SWIGI = $(wildcard $(SWIG)/*.i)
-SWIGROOTS = $(SWIG)/waves.i
+SWIGROOTS = $(SWIG)/vrend.i
 TOOL_EXECUTABLES = $(patsubst $(TOOLS)/%.cpp, $(BIN)/%, $(TOOL_SOURCES))
 
 SWIGWRAPS = $(patsubst $(SWIG)/%.i, $(SWIG)/%_wrap.cxx, $(SWIGROOTS))
