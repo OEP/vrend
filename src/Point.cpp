@@ -8,6 +8,13 @@ Point::Point()
   m_XYZ[0] = m_XYZ[1] = m_XYZ[2] = 0.0;
 }
 
+Point::Point(const Point &other)
+{
+  m_XYZ[0] = other.m_XYZ[0];
+  m_XYZ[1] = other.m_XYZ[1];
+  m_XYZ[2] = other.m_XYZ[2];
+}
+
 Point::Point(const double x, const double y, const double z)
 {
   m_XYZ[0] = x;

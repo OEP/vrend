@@ -14,6 +14,7 @@ namespace vr
     protected:
     public:
       Point();
+      Point(const Point&);
       Point(const double, const double, const double);
     
       double X() const;

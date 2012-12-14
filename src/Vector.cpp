@@ -10,6 +10,13 @@ Vector::Vector()
   m_XYZ[0] = m_XYZ[1] = m_XYZ[2] = 0.0;
 }
 
+Vector::Vector(const Vector &other)
+{
+  m_XYZ[0] = other.m_XYZ[0];
+  m_XYZ[1] = other.m_XYZ[1];
+  m_XYZ[2] = other.m_XYZ[2];
+}
+
 Vector::Vector(const double x, const double y, const double z)
 {
   m_XYZ[0] = x;

@@ -15,6 +15,7 @@ namespace vr
     protected:
     public:
       Vector();
+      Vector(const Vector&);
       Vector(const double x, const double y, const double z);
 
       const double magnitude() const;

@@ -13,6 +13,7 @@ namespace vr
     protected:
     public:
       Ray() {}
+      Ray(const Ray &other);
       Ray(const Point &p, const Vector &direction);
       
       const Point& origin() const;

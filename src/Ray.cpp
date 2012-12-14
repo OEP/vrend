@@ -3,6 +3,12 @@
 
 using namespace vr;
 
+Ray::Ray(const Ray &other)
+{
+  m_Origin = Point(other.origin());
+  m_Direction = Vector(other.direction());
+}
+
 Ray::Ray(const Point &p, const Vector &direction)
 {
   m_Origin = Point(p);
