@@ -98,3 +98,8 @@ ostream& vr::operator<< (ostream& out, const vr::Vector &v)
     v.Z() << ">";
   return out;
 }
+
+const Vector vr::operator*(const double t, const Vector &v)
+{
+  return Vector(t * v.X(), t * v.Y(), t * v.Z());
+}

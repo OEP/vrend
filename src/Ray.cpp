@@ -19,6 +19,11 @@ const Vector& Ray::direction() const
   return m_Direction;
 }
 
+const Point Ray::trace(const double t) const
+{
+  return m_Origin + (t * m_Direction);
+}
+
 ostream& vr::operator<<(ostream& out, const Ray &r)
 {
   out << "[" << r.origin() << ", " << r.direction() << "]";

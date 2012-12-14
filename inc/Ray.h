@@ -1,3 +1,6 @@
+#ifndef RAY_H_
+#define RAY_H_
+
 #include <ostream>
 
 #include "Vector.h"
@@ -17,7 +20,10 @@ namespace vr
       
       const Point& origin() const;
       const Vector& direction() const;
+      const Point trace(const double) const;
   };
 
   std::ostream& operator<<(std::ostream& out, const Ray &r);
 }
+
+#endif
