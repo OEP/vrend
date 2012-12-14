@@ -93,11 +93,11 @@ $(BIN):
 	mkdir -p $(BIN)
 
 ## generates softlinks to swig python libraries
-$(SCRIPTS)/%.py: $(SWIGSOS)
+$(SCRIPTS)/%.py:
 	ln -sf ../$(LIB)/$*.py $@
 
 ## generates softlinks to swig shared libraries
-$(SCRIPTS)/%.so: $(SWIGSOS)
+$(SCRIPTS)/%.so:
 	ln -sf ../$< $@
 
 ## generates swig wrapper code
