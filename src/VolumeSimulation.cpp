@@ -1,5 +1,7 @@
 #include "VolumeSimulation.h"
 
+using namespace vr;
+
 VolumeSimulation::VolumeSimulation(int x, int y, int z)
 {
   m_Shape[0] = x;
@@ -11,6 +13,11 @@ VolumeSimulation::VolumeSimulation(int x, int y, int z)
 VolumeSimulation::~VolumeSimulation()
 {
   delete [] m_Grid;
+}
+
+int VolumeSimulation::size()
+{
+  return sizeX() * sizeY() * sizeZ();
 }
 
 int VolumeSimulation::sizeX()
@@ -26,4 +33,5 @@ int VolumeSimulation::sizeY()
 int VolumeSimulation::sizeZ()
 {
   return m_Shape[2];
+
 }

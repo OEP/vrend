@@ -13,6 +13,7 @@ namespace vr
     protected:
     public:
       VolumeSimulation(int, int, int);
+      ~VolumeSimulation();
       
       int sizeX();
       int sizeY();
