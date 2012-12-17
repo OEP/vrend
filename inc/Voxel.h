@@ -8,10 +8,10 @@ namespace vr
   class Voxel
   {
     private:
-      Voxel();
     protected:
+      Voxel() {};
     public:
-      virtual const Color toColor() = 0;
+      virtual const Color toColor() const = 0;
   };
 }
 
