@@ -8,7 +8,7 @@ namespace vr
   class VolumeSimulation
   {
     private:
-      Voxel *m_Grid;
+      Voxel **m_Grid;
       int m_Shape[3];
     protected:
     public:
