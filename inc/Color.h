@@ -1,4 +1,5 @@
-
+#ifndef COLOR_H_
+#define COLOR_H_
 
 namespace vr
 {
@@ -18,3 +19,5 @@ namespace vr
       float alpha() const;
   };
 }
+
+#endif
