@@ -7,19 +7,53 @@
 
 using namespace vr;
 
+Box::Box()
+{
+  m_Bounds[0] = Point(-0.5, -0.5, -0.5);
+  m_Bounds[1] = Point(0.5, 0.5, 0.5);
+}
+
 Box::Box(const Point& min, const Point& max)
 {
   m_Bounds[0] = min;
   m_Bounds[1] = max;
 }
 
-bool Box::intersects(const Ray& r)
+Box::Box(const Box &other)
+{
+  m_Bounds[0] = Point(other.m_Bounds[0]);
+  m_Bounds[1] = Point(other.m_Bounds[1]);
+}
+
+double Box::sizeX() const
+{
+  return m_Bounds[1].X() - m_Bounds[0].X();
+}
+
+double Box::sizeY() const
+{
+  return m_Bounds[1].Y() - m_Bounds[0].Y();
+}
+
+double Box::sizeZ() const
+{
+  return m_Bounds[1].Z() - m_Bounds[0].Z();
+}
+
+const Point Box::transform(const Point &p) const
+{
+  return Point(m_Bounds[0].X() - p.X(),
+    m_Bounds[0].Y() - p.Y(),
+    m_Bounds[0].Z() - p.Z());
+}
+
+bool Box::intersects(const Ray& r) const
 {
   double dump1, dump2;
   return intersects(r, dump1, dump2);
 }
 
-bool Box::intersects(const Ray& r, double& t0, double& t1)
+bool Box::intersects(const Ray& r, double& t0, double& t1) const
 {
   double tmin, tmax, tymin, tymax, tzmin, tzmax;
 

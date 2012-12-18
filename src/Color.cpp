@@ -44,3 +44,38 @@ float Color::alpha() const
 {
   return m_RGBA[3];
 }
+
+const Color Color::operator+(const Color &c) const
+{
+  return Color(red() + c.red(),
+    green() + c.green(),
+    blue() + c.blue(),
+    alpha() + c.alpha());
+}
+
+const Color Color::operator-(const Color &c) const
+{
+  return Color(red() - c.red(),
+    green() - c.green(),
+    blue() - c.blue(),
+    alpha() - c.alpha());
+}
+
+const Color Color::operator*(double amt) const
+{
+  return Color(red() * amt,
+    green() * amt,
+    blue() * amt,
+    alpha() * amt);
+}
+
+const Color Color::operator|(const Color &c) const
+{
+  const double a = c.alpha();
+  return (1-a) * (*this) + a * c;
+}
+
+const Color vr::operator*(double amt, const Color &c)
+{
+  return c * amt;
+}

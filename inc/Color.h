@@ -17,7 +17,16 @@ namespace vr
       float green() const;
       float blue() const;
       float alpha() const;
+
+      const Color operator+(const Color&) const;
+      const Color operator-(const Color&) const;
+      const Color operator*(const double) const;
+      const Color operator|(const Color&) const;
+
+      friend const Color operator*(const double, const Color &);
   };
+
+  const Color operator*(const double, const Color &);
 }
 
 #endif

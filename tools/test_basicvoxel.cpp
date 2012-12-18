@@ -1,15 +1,12 @@
 #include <iostream>
 
-#include "BasicVoxel.h"
+#include "Voxel.h"
 
 using namespace std;
 using namespace vr;
 
 int main()
 {
-  BasicVoxel bv(0.5);
-
-  Color r = bv.toColor();
-
-  cout << r.red() << endl;
+  Voxel v;
+  cout << v.value << endl;
 }
