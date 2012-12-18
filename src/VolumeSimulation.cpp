@@ -26,9 +26,9 @@ const Color VolumeSimulation::shade(const Ray &r, int steps) const
 
   Color tmp = shade(r.trace(t1));
 
-  for(int i = 0; i <= steps; i++)
+  for(int i = steps-1; i >= 0; i--)
   {
-    tmp = tmp | shade(r.trace(i * (t1-t0) / steps));
+    tmp = tmp | shade(r.trace(t0 + i * (t1-t0) / steps));
   }
 
   return tmp;
