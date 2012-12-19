@@ -14,6 +14,11 @@ namespace vr
       Vector m_Up, m_Right, m_View;
       double m_FOV;
       double m_AspectRatio;
+
+      double m_HTanFOV;
+      double m_VTanFOV;
+
+      void update();
     protected:
     public:
       Camera();

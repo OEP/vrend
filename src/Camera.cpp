@@ -11,6 +11,7 @@ Camera::Camera()
   m_View = m_Up ^ m_Right;
   m_FOV = 60.0 * M_PI / 180.0;
   m_AspectRatio = 1.6;
+  update();
 }
 
 Camera::Camera(const Vector &up, const Vector &right)
@@ -21,6 +22,7 @@ Camera::Camera(const Vector &up, const Vector &right)
   m_View = m_Up ^ m_Right;
   m_FOV = 60.0 * M_PI / 180.0;
   m_AspectRatio = 1.6;
+  update();
 }
 
 void Camera::look(double eyeX, double eyeY, double eyeZ,
@@ -33,16 +35,14 @@ void Camera::look(double eyeX, double eyeY, double eyeZ,
   Point subject = Point(sX, sY, sZ);
   m_View = (subject - m_Eye).unit();
   m_Right = m_View ^ m_Up;
+  update();
 }
 
 const Ray Camera::getRay(const double x, const double y) const
 {
   const double
-    htanfov = tan(horizontalFOV()),
-    vtanfov = tan(verticalFOV());
-  const double
-    xx = (2.0 * x - 1.0) * htanfov,
-    yy = (2.0 * y - 1.0) * vtanfov;
+    xx = (2.0 * x - 1.0) * m_HTanFOV,
+    yy = (2.0 * y - 1.0) * m_VTanFOV;
 
   return Ray(eye(), yy * up() + xx * right() + view());
 }
@@ -75,4 +75,10 @@ const Vector& Camera::up() const
 const Vector& Camera::right() const
 {
   return m_Right;
+}
+
+void Camera::update()
+{
+  m_HTanFOV = tan(horizontalFOV());
+  m_VTanFOV = tan(verticalFOV());
 }
