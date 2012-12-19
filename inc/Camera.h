@@ -3,6 +3,7 @@
 
 #include "Vector.h"
 #include "Point.h"
+#include "Ray.h"
 
 namespace vr
 {
@@ -10,7 +11,7 @@ namespace vr
   {
     private:
       Point m_Eye;
-      Vector m_AxisUp, m_AxisRight, m_AxisView;
+      Vector m_Up, m_Right, m_View;
       double m_FOV;
       double m_AspectRatio;
     protected:
@@ -23,6 +24,15 @@ namespace vr
         double, double, double);
       void setAspectRatio(double);
       void setFOV(double);
+
+      double horizontalFOV() const;
+      double verticalFOV() const;
+
+      const Point& eye() const;
+      const Vector& view() const;
+      const Vector& up() const;
+      const Vector& right() const;
+      const Ray getRay(const double, const double) const;
   };
 }
 

@@ -1,24 +1,30 @@
+#include <stack>
+
 #include "raygen.h"
+#include "Camera.h"
+#include "Ray.h"
 
 using namespace vr;
 
-void generate_rays(std::stack<Ray> &raybundle, const Camera &cam, int width, int height, int spp)
+void vr::generate_rays(std::stack<Ray> &raybundle, const Camera &cam, int width, int height, int spp)
 {
   const double
-    dhfov = cam.horizontalFOV() / width,
-    dvfov = cam.verticalFOV() / height,
-    hstart = -cam.horizontalFOV() / 2,
-    vstart = -cam.verticalFOV() / 2;
+    dx = 1 / (double) width,
+    dy = 1 / (double) height;
 
   for( int j = 0 ; j < height ; j++ )
   {
-    const double vfov = vstart + j * cam.verticalFOV() / height;
+    const double y = j / (double) (height-1);
     for( int i = 0 ; i < width  ; i++ )
     {
-      const double hfov = hstart + i * cam.horizontalFOV() / width; 
+      const double x = i / (double) (width-1);
       for( int k = 0; k < spp; k++)
       {
-        
+        const double
+          xx = x + drand48() * dx,
+          yy = y + drand48() * dy;
+
+        raybundle.push(cam.getRay(xx, yy));
       }
     }
   }

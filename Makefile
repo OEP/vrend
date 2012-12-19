@@ -17,8 +17,8 @@ ARFLAGS=rvs
 CFLAGS+=-g -Wall -I$(INC) -std=c++0x -c -fPIC
 TOOL_CFLAGS += -Wall -I$(INC) -std=c++0x -L$(LIB)
 
-LDFLAGS+=-lfftw3
-TOOL_LDFLAGS += -lrt -lvrend -lpng -lfftw3 -lGL -lGLU -lglut
+LDFLAGS += 
+TOOL_LDFLAGS += -lvrend
 
 SWIGCFLAGS += -c -I$(INC) -I/usr/include/python2.7
 SWIGLDFLAGS += -L$(LIB) -lpython2.7 -lvrend -lpng -lfftw3
