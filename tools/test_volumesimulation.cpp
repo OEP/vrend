@@ -6,7 +6,8 @@ using namespace vr;
 
 int main()
 {
-  VolumeSimulation v(64, 64, 64);
+  Box b;
+  VolumeSimulation v(b, 64, 64, 64);
 
   cout << v.size() << endl;
 }

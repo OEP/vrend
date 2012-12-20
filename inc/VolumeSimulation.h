@@ -18,7 +18,7 @@ namespace vr
     protected:
       int index(int,int,int) const;
     public:
-      VolumeSimulation(int, int, int);
+      VolumeSimulation(const Box &b, int, int, int);
       ~VolumeSimulation();
 
       const Color shade(const Ray&, int) const;

@@ -3,8 +3,9 @@
 
 using namespace vr;
 
-VolumeSimulation::VolumeSimulation(int x, int y, int z)
+VolumeSimulation::VolumeSimulation(const Box &b, int x, int y, int z)
 {
+  m_Bounds = b;
   m_Shape[0] = x;
   m_Shape[1] = y;
   m_Shape[2] = z;
