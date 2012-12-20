@@ -2,11 +2,11 @@
 
 #include "raygen.h"
 #include "Camera.h"
-#include "Ray.h"
+#include "CameraRay.h"
 
 using namespace vr;
 
-void vr::generate_rays(std::stack<Ray> &raybundle, const Camera &cam, int width, int height, int spp)
+void vr::generate_rays(std::stack<CameraRay> &raybundle, const Camera &cam, int width, int height, int spp)
 {
   const double
     dx = 1 / (double) width,
@@ -24,7 +24,7 @@ void vr::generate_rays(std::stack<Ray> &raybundle, const Camera &cam, int width,
           xx = x + drand48() * dx,
           yy = y + drand48() * dy;
 
-        raybundle.push(cam.getRay(xx, yy));
+        raybundle.push(CameraRay(cam.getRay(xx, yy), j * width + i));
       }
     }
   }

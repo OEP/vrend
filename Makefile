@@ -15,10 +15,10 @@ WAVESLIB = $(LIB)/libvrend.a
 
 ARFLAGS=rvs
 CFLAGS+=-g -Wall -I$(INC) -std=c++0x -c -fPIC
-TOOL_CFLAGS += -Wall -I$(INC) -std=c++0x -L$(LIB)
+TOOL_CFLAGS += -g -Wall -I$(INC) -std=c++0x -L$(LIB)
 
 LDFLAGS += 
-TOOL_LDFLAGS += -lvrend
+TOOL_LDFLAGS += -lvrend -lpng
 
 SWIGCFLAGS += -c -I$(INC) -I/usr/include/python2.7
 SWIGLDFLAGS += -L$(LIB) -lpython2.7 -lvrend -lpng -lfftw3
