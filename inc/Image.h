@@ -14,6 +14,7 @@ namespace vr
       int *m_Frequency;
       float *m_Values;
     protected:
+      void _normalize(float *values) const;
       void _fill(float value, int mode);
       void _fill(const Color &c, int mode);
       void _fill(const float *value, int mode);

@@ -37,5 +37,5 @@ int main()
     }
   }
 
-  im.write("output.png");
+  im.write("output.exr");
 }

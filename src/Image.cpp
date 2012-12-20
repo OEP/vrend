@@ -1,6 +1,6 @@
 #include <assert.h>
-#include <iostream>
-using namespace std;
+#include <OpenImageIO/imageio.h>
+OIIO_NAMESPACE_USING
 
 #include "Image.h"
 
@@ -160,30 +160,38 @@ void Image::_set(int i, int j, const float *value, const int mode)
   }
 }
 
+void Image::_normalize(float *values) const
+{
+  float *p = m_Values;
+  int *c = m_Frequency;
+  for(int i = 0; i < size(); i++, p++, c++, values++)
+  {
+    *values = (*c > 0) ? *p / *c : *p;
+  }
+}
 
 void Image::write(const char *filename) const
 {
-  assert(depth() == 4 || depth() == 3);
   png::image< png::rgba_pixel > im(width(), height());
 
-  float *p = m_Values;
-  int *c = m_Frequency;
-  for(size_t y = 0; y < height(); y++)
-  {
-    for(size_t x = 0; x < width(); x++)
-    {
-      const float
-        r = (c[0] > 0) ? p[0] / c[0] : p[0],
-        g = (c[1] > 0) ? p[1] / c[1] : p[1],
-        b = (c[2] > 0) ? p[2] / c[2] : p[2],
-        a = (depth() == 3) ? 1.0f : (c[3] > 0) ? p[3] / c[3] : p[3];
-      im[y][x] = png::rgba_pixel(255*r, 255*g, 255*b, 255*a);
-      p += depth();
-      c += depth();
-    }
-  }
+  float *imgdata = new float[size()];
+  _normalize(imgdata);
 
-  im.write(filename);
+  ImageOutput *out = ImageOutput::create(filename);
+
+  if(!out)
+  {
+    delete [] imgdata;
+    return;
+  }
+  
+  ImageSpec spec(width(), height(), depth(), TypeDesc::FLOAT);
+  out->open(filename, spec);
+  out->write_image(TypeDesc::FLOAT, imgdata);
+  out->close();
+
+  delete out;
+  delete [] imgdata;
 }
 
 int Image::size() const
