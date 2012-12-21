@@ -1,5 +1,6 @@
 #include <cmath>
-
+#include <iostream>
+using namespace std;
 #include "SphereTestSimulationStrategy.h"
 
 using namespace vr;
@@ -28,7 +29,13 @@ void SphereTestSimulationStrategy::initialize(Voxel *grid, int sx, int sy, int s
         const double dist = std::sqrt(dx*dx+dy*dy+dz*dz);
         if(dist < m_Radius)
         {
-          grid[index].value = 1.0;
+          grid[index].dvalue = 0.7;
+          grid[index].color = Color(1.0, 0.7);
+        }
+        else
+        {
+          grid[index].dvalue = 0.2;
+          grid[index].color = Color(1.0, 0.2);
         }
         index++;
       }

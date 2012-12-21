@@ -28,14 +28,12 @@ const Color VolumeSimulation::shade(const Ray &r, int steps) const
   }
 
   Color tmp = shade(r.trace(t1));
-
   for(int i = steps-1; i >= 0; i--)
   {
     const Color c = shade(r.trace(t0 + i * (t1-t0) / steps));
     tmp = tmp | c;
   }
 
-  std::cout << tmp << std::endl;
 
   return tmp;
 }
@@ -75,12 +73,10 @@ VolumeSimulation::shade(const int i, const int j, const int k) const
   if(!_inBounds(i,j,k))
   {
     const Color c = Color(0.0, 0.0);
-//    std::cout << "    " << c << Point(i,j,k) << std::endl;
     return c;
   }
 
   const Color c = m_ShadeStrategy.shade(m_Grid[index(i,j,k)]);
-//  std::cout << "    " << c << Point(i,j,k) << std::endl;
   return c;
 }
 

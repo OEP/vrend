@@ -8,5 +8,5 @@ using namespace vr;
 int main()
 {
   Voxel v;
-  cout << v.value << endl;
+  cout << v.color << endl;
 }

@@ -15,12 +15,12 @@ int main()
   stack<CameraRay> rays;
   Camera c;
   Box b(Point(-0.5, -0.5, -1.5), Point(0.5, 0.5, -2.5));
-  VolumeSimulation v(new SphereTestSimulationStrategy(25.0), b, 256, 256, 256);
-  Image im(1280, 720, 4);
+  VolumeSimulation v(new SphereTestSimulationStrategy(50.0), b, 256, 256, 256);
+  Image im(640, 480, 4);
   Scene sc(c);
 
   sc.addVolumeSimulation(&v);
-  sc.render(im, 1, 255);
+  sc.render(im, 15, 36);
 
   im.write("output.exr");
 }
