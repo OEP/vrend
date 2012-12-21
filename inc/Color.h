@@ -11,6 +11,7 @@ namespace vr
       float m_RGBA[3];
     protected:
     public:
+      Color();
       Color(float);
       Color(float, float);
       Color(float, float, float);

@@ -5,6 +5,14 @@
 using namespace std;
 using namespace vr;
 
+Color::Color()
+{
+  m_RGBA[0] =
+    m_RGBA[1] = 
+    m_RGBA[2] = 
+    m_RGBA[3] = 0.0f;
+}
+
 Color::Color(float grey)
 {
   m_RGBA[0] = m_RGBA[1] = m_RGBA[2] = grey;
