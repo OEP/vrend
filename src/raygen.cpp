@@ -1,4 +1,4 @@
-#include <stack>
+#include <vector>
 
 #include "raygen.h"
 #include "Camera.h"
@@ -6,7 +6,7 @@
 
 using namespace vr;
 
-void vr::generate_rays(std::stack<CameraRay> &raybundle, const Camera &cam, int width, int height, int spp)
+void vr::generate_rays(std::vector<CameraRay> &raybundle, const Camera &cam, int width, int height, int spp)
 {
   const double
     dx = 1 / (double) width,
@@ -24,7 +24,7 @@ void vr::generate_rays(std::stack<CameraRay> &raybundle, const Camera &cam, int 
           xx = x + drand48() * dx,
           yy = y + drand48() * dy;
 
-        raybundle.push(CameraRay(cam.getRay(xx, yy), j * width + i));
+        raybundle.push_back(CameraRay(cam.getRay(xx, yy), j * width + i));
       }
     }
   }

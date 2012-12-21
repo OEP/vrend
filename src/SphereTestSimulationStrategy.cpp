@@ -35,7 +35,7 @@ void SphereTestSimulationStrategy::initialize(Voxel *grid, int sx, int sy, int s
         else
         {
           grid[index].dvalue = 0.2;
-          grid[index].color = Color(1.0, 0.2);
+          grid[index].color = Color(1.0, 0.02);
         }
         index++;
       }

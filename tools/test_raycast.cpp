@@ -12,7 +12,6 @@ using namespace vr;
 
 int main()
 {
-  stack<CameraRay> rays;
   Camera c;
   Box b(Point(-0.5, -0.5, -1.5), Point(0.5, 0.5, -2.5));
   VolumeSimulation v(new SphereTestSimulationStrategy(50.0), b, 256, 256, 256);

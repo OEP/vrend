@@ -1,4 +1,4 @@
-#include <stack>
+#include <vector>
 
 #include "Scene.h"
 #include "raygen.h"
@@ -13,13 +13,13 @@ Scene::Scene(const Camera &cam)
 
 void Scene::render(Image &im, int rpp, int spv) const
 {
-  stack<CameraRay> rays;
+  vector<CameraRay> rays;
   generate_rays(rays, m_Camera, im.width(), im.height(), rpp);
 
-  while(rays.size() > 0)
+  #pragma omp parallel for 
+  for(int i = 0; i < rays.size(); i++)
   {
-    CameraRay r = rays.top();
-    rays.pop();
+    CameraRay &r = rays[i];
     const int
       id = r.getRayId(),
       x = id % im.width(),
