@@ -5,6 +5,7 @@
 #include "Box.h"
 #include "Color.h"
 #include "BaseShadeStrategy.h"
+#include "SimulationStrategy.h"
 
 namespace vr
 {
@@ -15,11 +16,12 @@ namespace vr
       Voxel *m_Grid;
       int m_Shape[3];
       BaseShadeStrategy m_ShadeStrategy;
+      SimulationStrategy *m_SimStrategy;
     protected:
       int index(int,int,int) const;
       bool _inBounds(int,int,int) const;
     public:
-      VolumeSimulation(const Box &b, int, int, int);
+      VolumeSimulation(SimulationStrategy*, const Box &b, int, int, int);
       ~VolumeSimulation();
 
       const Color shade(const Ray&, int) const;

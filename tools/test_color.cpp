@@ -6,15 +6,13 @@ using namespace std;
 
 int main()
 {
-  Color c(1.0f);
-  Color b(0, 0, 0, 0.3);
+  Color a(0,0);
+  Color b(1,1);
 
-  cout << c.red() << endl;
-  cout << c.green() << endl;
-  cout << c.blue() << endl;
-  cout << c.alpha() << endl;
+  Color ab = a | b;
+  Color ba = b | a;
 
-  Color a = c | b;
+  cout << a << " | " << b  << " = " << ab << endl;
+  cout << b << " | " << a  << " = " << ba << endl;
 
-  cout << a.red() << endl;
 }

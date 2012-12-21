@@ -1,6 +1,8 @@
 #ifndef COLOR_H_
 #define COLOR_H_
 
+#include <ostream>
+
 namespace vr
 {
   class Color
@@ -10,8 +12,10 @@ namespace vr
     protected:
     public:
       Color(float);
+      Color(float, float);
       Color(float, float, float);
       Color(float, float, float, float);
+      Color(const Color&);
 
       float red() const;
       float green() const;
@@ -22,11 +26,13 @@ namespace vr
       const Color operator-(const Color&) const;
       const Color operator*(const double) const;
       const Color operator|(const Color&) const;
+      const Color& operator=(const Color&);
 
       friend const Color operator*(const double, const Color &);
   };
 
   const Color operator*(const double, const Color &);
+  std::ostream& operator<<(std::ostream&, const Color&);
 }
 
 #endif

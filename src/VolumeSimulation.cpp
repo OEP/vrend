@@ -3,13 +3,15 @@
 
 using namespace vr;
 
-VolumeSimulation::VolumeSimulation(const Box &b, int x, int y, int z)
+VolumeSimulation::VolumeSimulation(SimulationStrategy *strategy, const Box &b, int x, int y, int z)
+  : m_SimStrategy(strategy)
 {
   m_Bounds = b;
   m_Shape[0] = x;
   m_Shape[1] = y;
   m_Shape[2] = z;
   m_Grid = new Voxel[x*y*z];
+  m_SimStrategy->initialize(m_Grid, m_Shape[0], m_Shape[1], m_Shape[2]);
 }
 
 VolumeSimulation::~VolumeSimulation()
@@ -22,15 +24,18 @@ const Color VolumeSimulation::shade(const Ray &r, int steps) const
   double t0, t1;
   if(!m_Bounds.intersects(r, t0, t1))
   {
-    return Color(0.0);
+    return Color(0.0, 0.0);
   }
 
   Color tmp = shade(r.trace(t1));
 
   for(int i = steps-1; i >= 0; i--)
   {
-    tmp = tmp | shade(r.trace(t0 + i * (t1-t0) / steps));
+    const Color c = shade(r.trace(t0 + i * (t1-t0) / steps));
+    tmp = tmp | c;
   }
+
+  std::cout << tmp << std::endl;
 
   return tmp;
 }
@@ -51,7 +56,7 @@ const Color VolumeSimulation::shade(const Point &p) const
     wy = gy - iy,
     wz = gz - iz;
 
-  return
+  const Color c =
     wx     * wy     * wz     * shade(ix  , iy  , iz  ) +
     wx     * wy     * (1-wz) * shade(ix  , iy  , iz+1) +
     wx     * (1-wy) * wz     * shade(ix  , iy+1, iz  ) +
@@ -60,6 +65,8 @@ const Color VolumeSimulation::shade(const Point &p) const
     (1-wx) * wy     * (1-wz) * shade(ix+1, iy  , iz+1) +
     (1-wx) * (1-wy) * wz     * shade(ix+1, iy+1, iz  ) +
     (1-wx) * (1-wy) * (1-wz) * shade(ix+1, iy+1, iz+1);
+
+  return c;
 }
 
 const Color 
@@ -67,9 +74,14 @@ VolumeSimulation::shade(const int i, const int j, const int k) const
 {
   if(!_inBounds(i,j,k))
   {
-    return Color(0.0);
+    const Color c = Color(0.0, 0.0);
+//    std::cout << "    " << c << Point(i,j,k) << std::endl;
+    return c;
   }
-  return m_ShadeStrategy.shade(m_Grid[index(i,j,k)]);
+
+  const Color c = m_ShadeStrategy.shade(m_Grid[index(i,j,k)]);
+//  std::cout << "    " << c << Point(i,j,k) << std::endl;
+  return c;
 }
 
 bool VolumeSimulation::_inBounds(const int i, const int j, const int k) const

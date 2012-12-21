@@ -11,3 +11,10 @@
 *.lai
 *.la
 *.a
+
+# vim files
+*.swp
+
+# image files
+*.png
+*.exr
