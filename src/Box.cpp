@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <limits>
 
 #include "Box.h"
@@ -42,9 +43,7 @@ double Box::sizeZ() const
 
 const Point Box::transform(const Point &p) const
 {
-  return Point(m_Bounds[0].X() - p.X(),
-    m_Bounds[0].Y() - p.Y(),
-    m_Bounds[0].Z() - p.Z());
+  return Point(0,0,0) + (p - m_Bounds[0]);
 }
 
 bool Box::intersects(const Ray& r) const
@@ -109,6 +108,11 @@ bool Box::intersects(const Ray& r, double& t0, double& t1) const
 
   t0 = std::max(tmin,  0.0);
   t1 = std::min(tmax, std::numeric_limits<double>::max());
+
+  if(t1 < t0)
+  {
+    std::swap(t1, t0);
+  }
 
   return true;
 }

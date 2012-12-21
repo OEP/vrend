@@ -17,6 +17,7 @@ namespace vr
       BaseShadeStrategy m_ShadeStrategy;
     protected:
       int index(int,int,int) const;
+      bool _inBounds(int,int,int) const;
     public:
       VolumeSimulation(const Box &b, int, int, int);
       ~VolumeSimulation();

@@ -65,7 +65,17 @@ const Color VolumeSimulation::shade(const Point &p) const
 const Color 
 VolumeSimulation::shade(const int i, const int j, const int k) const
 {
+  if(!_inBounds(i,j,k))
+  {
+    return Color(0.0);
+  }
   return m_ShadeStrategy.shade(m_Grid[index(i,j,k)]);
+}
+
+bool VolumeSimulation::_inBounds(const int i, const int j, const int k) const
+{
+  return i >= 0 && j >= 0 && k >= 0 &&
+    i < sizeX() && j < sizeY() && k < sizeZ();
 }
 
 int VolumeSimulation::index(int i, int j, int k) const

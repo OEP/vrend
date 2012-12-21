@@ -53,9 +53,9 @@ const Point Point::operator+(const Vector &other) const
 const Vector Point::operator-(const Point &other) const
 {
   return Vector(
-    other.X() - X(),
-    other.Y() - Y(),
-    other.Z() - Z());
+    X() - other.X(),
+    Y() - other.Y(),
+    Z() - other.Z());
 }
 
 ostream& vr::operator<<(ostream& out, const Point &p)
